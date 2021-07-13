@@ -1,0 +1,14 @@
+name: run-tests
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone
+        uses: actions/checkout@v2
+      - run: echo "${{ github.repository }}"
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "${{ job.status }}."
+
