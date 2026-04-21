@@ -17,10 +17,16 @@ jobs:
         run: |
           ls ${{ github.workspace }}
           false
+      - name: List files in the repository
+        id: taskc
+        if: ${{ always() }}
+        run: |
+          ls ${{ github.workspace }}
+          false
       - name: status
         if: ${{ always() }}
-        run: echo "${{ steps.taska.status }}."
+        run: echo "${{ steps.taska.outcome }} ${{ steps.taskb.outcome }} ${{ steps.taskc.outcome }}."
       - name: status
-        if: ${{ always() }}
-        run: echo "${{ steps.taskb.status }}."
+        if: ${{ always() && (steps.taska.outcome == 'failure' || steps.taskb.outcome == 'failure' || steps.taskc.outcome == 'failure')}}
+        run: echo "Failed"
 
