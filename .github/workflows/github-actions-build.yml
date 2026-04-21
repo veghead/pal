@@ -13,11 +13,14 @@ jobs:
           ls ${{ github.workspace }}
       - name: List files in the repository
         id: task2
+        if: ${{ always() }}
         run: |
           ls ${{ github.workspace }}
           false
       - name: status
+        if: ${{ always() }}
         run: echo "${{ steps.task1.status }}."
       - name: status
+        if: ${{ always() }}
         run: echo "${{ steps.task2.status }}."
 
